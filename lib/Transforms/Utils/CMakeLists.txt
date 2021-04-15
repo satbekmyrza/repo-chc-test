@@ -1,0 +1,17 @@
+add_llvm_library(SeaTransformsUtils
+  AbstractMemory.cc
+  DummyExitBlock.cc
+  Local.cc
+  MarkInternalInline.cc
+  MarkInternalSpecialFunctions.cc
+  NameValues.cpp
+  RemoveUnreachableBlocksPass.cc
+  DummyMainFunction.cc
+  ExternalizeAddressTakenFunctions.cc
+  ExternalizeFunctions.cc
+  DevirtFunctions.cc
+  SliceFunctions.cc
+  Mem2Reg.cc
+  OneAssumePerBlock.cc
+  SliceFunctions.cc
+  )

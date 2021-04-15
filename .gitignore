@@ -1,0 +1,16 @@
+/build/
+/GPATH
+/GRTAGS
+/GTAGS
+/ext/
+/debug/
+/static/
+/dsa-seahorn/
+/crab-llvm/
+/sea-dsa/
+/llvm-dsa/
+*.pyc
+*.pyo
+/llvm-seahorn/
+/seahorn-llvm/
+/gtags.files
