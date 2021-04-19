@@ -101,7 +101,7 @@ endif ()
 
 
 ################################### Z3 ###################################
-set (Z3_TAG "z3-4.8.10" CACHE STRING "Z3 git tag to use")
+set (Z3_TAG "z3-4.4.0" CACHE STRING "Z3 git tag to use")
 set (Z3_REPO "https://github.com/Z3Prover/z3.git" CACHE STRING "Z3 repo")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   set (Z3_DEBUG "-d")
@@ -123,7 +123,7 @@ ExternalProject_Add(z3
   LOG_INSTALL 1
   LOG_BUILD 1)
 
-find_package(Z3 4.8.10)
+find_package(Z3 4.4.0)
 if (NOT Z3_FOUND)
   ExternalProject_Get_Property (z3 INSTALL_DIR)
   set(Z3_ROOT ${INSTALL_DIR} CACHE PATH "Forced location of Z3" FORCE)
@@ -141,7 +141,7 @@ endif()
 ################################### LLVM ###################################
 ExternalProject_Add (llvm
   GIT_REPOSITORY https://github.com/llvm/llvm-project.git
-  GIT_TAG llvmorg-11.1.0
+  GIT_TAG llvmorg-3.6.0
   SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/llvm
   SOURCE_SUBDIR llvm
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
@@ -158,7 +158,7 @@ ExternalProject_Add (llvm
   LOG_BUILD 1
   LOG_INSTALL 1)
 
-find_package (LLVM 11.1.0 CONFIG NO_DEFAULT_PATH)
+find_package (LLVM 3.6.0 CONFIG NO_DEFAULT_PATH)
 if (NOT LLVM_FOUND)
   ExternalProject_Get_Property (llvm INSTALL_DIR)
   set (LLVM_ROOT ${INSTALL_DIR})
@@ -190,6 +190,8 @@ else()
   add_definitions(${LLVM_DEFINITIONS})
 
 endif()
+
+
 
 set (PACKAGE_NAME SeaHorn)
 set(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
