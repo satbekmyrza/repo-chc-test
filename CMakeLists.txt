@@ -34,6 +34,9 @@ endif()
 list (APPEND CMAKE_MODULE_PATH
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+
+
+################################### GIT ###################################
 find_package (Git)
 if (GIT_FOUND)
   set (SEAHORN_LLVM_REPO "https://github.com/seahorn/llvm-seahorn"
@@ -96,6 +99,8 @@ if (NOT CMAKE_INSTALL_RPATH)
 endif ()
 
 
+
+################################### Z3 ###################################
 set (Z3_TAG "z3-4.8.10" CACHE STRING "Z3 git tag to use")
 set (Z3_REPO "https://github.com/Z3Prover/z3.git" CACHE STRING "Z3 repo")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -131,6 +136,9 @@ else()
   install (PROGRAMS ${Z3_EXECUTABLE} DESTINATION bin)
 endif()
 
+
+
+################################### LLVM ###################################
 ExternalProject_Add (llvm
   GIT_REPOSITORY https://github.com/llvm/llvm-project.git
   GIT_TAG llvmorg-11.1.0
