@@ -26,6 +26,7 @@
 * libgmp (brew installation available on Mac os x)
 * GCC 4.8, G++ 4.8 (for compiling z3)
 * Python 3.7 (for running `scripts/mk_make.py`)
+* gmp: `sudo apt-get update -y && sudo apt-get install -y libgmp-dev`
 
 
 # LinearArbitrary-SeaHorn Installation #
