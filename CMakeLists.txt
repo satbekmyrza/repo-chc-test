@@ -112,13 +112,13 @@ endif()
 ExternalProject_Add(z3
   GIT_REPOSITORY  ${Z3_REPO}
   GIT_TAG ${Z3_TAG}
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/z3
+  # SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/z3
   BUILD_IN_SOURCE 1
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
   # CONFIGURE_COMMAND env CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} ./configure -p <INSTALL_DIR> -b build --staticlib ${Z3_DEBUG}
   # BUILD_COMMAND make -j3 -C build
   # INSTALL_COMMAND make -C build install
-  COMMAND CC=gcc-4.8 CXX=g++-4.8 python3 <SOURCE_DIR>/scripts/mk_make.py --prefix=<INSTALL_DIR> && cd build && make && make install
+  COMMAND CC=gcc-4.8 CXX=g++-4.8 python3 scripts/mk_make.py --prefix=<INSTALL_DIR> && cd build && make && make install
   # COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_LIST_FILE}
   LOG_CONFIGURE 1
   LOG_INSTALL 1
