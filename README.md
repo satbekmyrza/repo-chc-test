@@ -24,6 +24,8 @@
 * Boost 1.63 (brew installation available on Mac os x)
 * libncurses (brew installation available on Mac os x)
 * libgmp (brew installation available on Mac os x)
+* GCC 4.8, G++ 4.8 (for compiling z3)
+* Python 3.7 (for running `scripts/mk_make.py`)
 
 
 # LinearArbitrary-SeaHorn Installation #
