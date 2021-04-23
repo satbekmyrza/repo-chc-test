@@ -39,23 +39,23 @@ list (APPEND CMAKE_MODULE_PATH
 ################################### GIT ###################################
 find_package (Git)
 if (GIT_FOUND)
-  set (SEAHORN_LLVM_REPO "https://github.com/seahorn/llvm-seahorn"
+  set (SEAHORN_LLVM_REPO "https://github.com/satbekmyrza/llvm-seahorn.git"
     CACHE STRING "seahorn-llvm repo")
-  set (LLVM_DSA_REPO "https://github.com/seahorn/llvm-dsa"
+  set (LLVM_DSA_REPO "https://github.com/satbekmyrza/llvm-dsa.git"
     CACHE STRING "llvm-dsa repo")
-  set (SEA_DSA_REPO "https://github.com/seahorn/sea-dsa"
+  set (SEA_DSA_REPO "https://github.com/satbekmyrza/sea-dsa.git"
     CACHE STRING "sea-dsa repo")
-  set (CRAB_LLVM_REPO "https://github.com/seahorn/crab-llvm"
+  set (CRAB_LLVM_REPO "https://github.com/satbekmyrza/crab-llvm.git"
     CACHE STRING "crab-llvm repo")
   
   add_custom_target (seahorn-llvm-git
-    ${GIT_EXECUTABLE} clone --depth 1 --branch stable-llvm-3.6 ${SEAHORN_LLVM_REPO} ${CMAKE_SOURCE_DIR}/llvm-seahorn)
+    ${GIT_EXECUTABLE} clone ${SEAHORN_LLVM_REPO} ${CMAKE_SOURCE_DIR}/llvm-seahorn)
   add_custom_target (llvm-dsa-git
-    ${GIT_EXECUTABLE} clone --depth 1 --branch stable-llvm-3.6 ${LLVM_DSA_REPO} ${CMAKE_SOURCE_DIR}/llvm-dsa)
+    ${GIT_EXECUTABLE} clone ${LLVM_DSA_REPO} ${CMAKE_SOURCE_DIR}/llvm-dsa)
   add_custom_target (sea-dsa-git
-    ${GIT_EXECUTABLE} clone --depth 1 --branch stable-llvm-3.6 ${SEA_DSA_REPO} ${CMAKE_SOURCE_DIR}/sea-dsa)
+    ${GIT_EXECUTABLE} clone ${SEA_DSA_REPO} ${CMAKE_SOURCE_DIR}/sea-dsa)
   add_custom_target (crab-llvm-git
-    ${GIT_EXECUTABLE} clone --depth 1 --branch stable-llvm-3.6 ${CRAB_LLVM_REPO} ${CMAKE_SOURCE_DIR}/crab-llvm)
+    ${GIT_EXECUTABLE} clone ${CRAB_LLVM_REPO} ${CMAKE_SOURCE_DIR}/crab-llvm)
   add_custom_target (extra
     ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_LIST_FILE}
     DEPENDS seahorn-llvm-git llvm-dsa-git sea-dsa-git crab-llvm-git)
