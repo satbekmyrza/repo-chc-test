@@ -1,5 +1,5 @@
 CXX ?= g++
-CFLAGS = -Wall -O3 -fPIC -Wno-c++11-extensions
+CFLAGS = -Wall -O3 -fPIC -std=c++11
 SHVER = 2
 OS = $(shell uname)
 
