@@ -30,7 +30,7 @@ RUN \
   apt-get install -y libboost1.55-all-dev && \
   apt-get install --yes libgmp-dev && \
   apt-get install --yes python-pip && \
-  sudo pip install lit && \
+  # sudo pip install lit && \
   sudo pip install OutputCheck
 
 # Install llvm and z3
