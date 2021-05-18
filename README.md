@@ -1,14 +1,3 @@
-
-<table>
-  <tr>
-    <th>Windows</th><th>Ubuntu</th><th>OS X</th>
-  </tr>
-    <td>TBD</td>
-    <td>Build</td>
-    <td>Build</td>
-  </tr>
-</table>
-
 # About #
 
 <a href="">LinearArbitrary-SeaHorn</a> is a CHC solver for LLVM-based languages.
@@ -19,14 +8,12 @@
 
 # LinearArbitrary-SeaHorn Dependencies #
 
-* LLVM 3.6 (the build script can automatically install it)
-* Z3 4.4.0 (the build script can automatically install it)
-* Boost 1.63 (brew installation available on Mac os x)
+* LLVM 3.6 (need to install manually or via Dockerfile)
+* Z3 4.6.0 (need to install manually or via Dockerfile)
+* Boost 1.55
 * libncurses (brew installation available on Mac os x)
 * libgmp (brew installation available on Mac os x)
-* GCC 4.8, G++ 4.8 (for compiling z3)
-* Python 3.7 (for running `scripts/mk_make.py`)
-* gmp: `sudo apt-get update -y && sudo apt-get install -y libgmp-dev`
+* GCC 4.8, G++ 4.8 (latest that comes with Ubuntu 14.04)
 
 
 # LinearArbitrary-SeaHorn Installation #
