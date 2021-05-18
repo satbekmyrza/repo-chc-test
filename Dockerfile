@@ -29,9 +29,9 @@ RUN \
   apt-get install python2.7 python2.7-dev -y && \
   apt-get install -y libboost1.55-all-dev && \
   apt-get install --yes libgmp-dev && \
-  apt-get install --yes python-pip && \
+  apt-get install --yes python-pip
   # sudo pip install lit && \
-  sudo pip install OutputCheck
+  # sudo pip install OutputCheck
 
 # Install llvm and z3 into /root/llvm-z3-run
 WORKDIR /root
