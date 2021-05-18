@@ -17,14 +17,16 @@
 
 
 # LinearArbitrary-SeaHorn Installation #
+Precondition1: llvm and z3 are installed at `/root/llvm-z3-run/`
+Precondition2: you are now at `/root/chc-test-repo/build/`
 
-* `cd seahorn ; mkdir build ; cd build`
-* `cmake -DCMAKE_INSTALL_PREFIX=run ../ `
-* `cmake --build .` to build dependencies (Z3 and LLVM)
-* `cmake --build . --target extra` to download extra packages
-* `cd ../llvm-seahorn/ && git reset --hard 39aa187 && cd ../llvm-dsa/ && git reset --hard fedb3e3 && cd ../sea-dsa/ && git reset --hard 246f0f5 && cd ../crab-llvm/ && git reset --hard e2fac87 && cd ../build/ && make ..` to configure extra packages
-* `cmake --build . --target crab && cmake ..` to configure crab-llvm
-* `cmake --build . --target install` to build LinearArbitrary-SeaHorn and install everything in `run` directory
+* `rm -rf *` to clean current folder
+* `rm -rf ../ext ../llvm-dsa ../llvm-seahorn ../sea-dsa ../crab-llvm` to remove dependencies installed previously, if any
+* `cp -r /root/llvm-z3-run/ run` to copy binaries of llvm and z3
+* `cmake -DZ3_ROOT=/root/chc-test-repo/build/run/ -DLLVM_DIR=/root/chc-test-repo/build/run/share/llvm/cmake/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_PROGRAM_PATH=/usr/bin/ -DCMAKE_INSTALL_PREFIX=run/ ../` to configure
+* `cmake --build . --target extra && cmake ..` to download extra packages
+* `cmake --build . --target crab && cmake ..` to download crab for crab-llvm
+* `cmake --build . --target install -- -j` to build LinearArbitrary-SeaHorn and install everything in `run` directory
 
 LinearArbitrary-SeaHorn and dependencies are installed in `build/run`.
 LinearArbitrary-SeaHorn doesn't come with its own version of Clang and expects to find it either in the build directory (run/bin) or in PATH. Make sure that the version of Clang matches the version of LLVM that comes with LinearArbitrary-SeaHorn (currently 3.6). The easiest way to provide the right version of Clang is to download it from [llvm.org](http://releases.llvm.org/download.html).
