@@ -33,7 +33,28 @@ RUN \
   # sudo pip install lit && \
   sudo pip install OutputCheck
 
-# Install llvm and z3
+# Install llvm and z3 into /root/llvm-z3-run
+WORKDIR /root
+RUN \
+  mkdir llvm-z3-run && \
+
+  git clone --depth 1 --branch llvmorg-3.6.0 https://github.com/llvm/llvm-project.git && \
+  cd llvm-project/llvm && \
+  mkdir build && \
+  cd build && \
+  cmake -DCMAKE_INSTALL_PREFIX:PATH=/root/llvm-z3-run .. && \
+  cmake --build . --target install -- -j && \
+
+  cd /root && \
+  git clone --depth 1 --branch z3-4.6.0 https://github.com/Z3Prover/z3.git && \
+  cd z3 && \
+  python scripts/mk_make.py --prefix=/root/llvm-z3-run && \
+  cd build && \
+  make -j && \
+  make install && \
+
+  cd /root && \
+  rm -rf llvm-project/ z3/
 
 
 # Install LinearArbitrary-SeaHorn
