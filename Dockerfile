@@ -5,6 +5,18 @@ FROM ubuntu:14.04
 
 MAINTAINER Satbek Abdyldayev <satbek@unist.ac.kr>
 
+# Set up openssh-server
+RUN \
+  apt-get update && \
+  apt-get install -y openssh-server && \
+  mkdir /var/run/sshd && \
+  echo 'root:root' | chpasswd && \
+  sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+  sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+  mkdir /root/.ssh && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Install
 RUN \
   sudo apt-get update -qq && \
@@ -23,4 +35,9 @@ RUN \
 
 # Install llvm and z3
 
+
 # Install LinearArbitrary-SeaHorn
+
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
