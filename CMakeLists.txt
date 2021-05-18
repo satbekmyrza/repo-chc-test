@@ -34,18 +34,15 @@ endif()
 list (APPEND CMAKE_MODULE_PATH
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-
-
-################################### GIT ###################################
 find_package (Git)
 if (GIT_FOUND)
-  set (SEAHORN_LLVM_REPO "https://github.com/satbekmyrza/llvm-seahorn.git"
+  set (SEAHORN_LLVM_REPO "https://github.com/satbekmyrza/llvm-seahorn"
     CACHE STRING "seahorn-llvm repo")
-  set (LLVM_DSA_REPO "https://github.com/satbekmyrza/llvm-dsa.git"
+  set (LLVM_DSA_REPO "https://github.com/satbekmyrza/llvm-dsa"
     CACHE STRING "llvm-dsa repo")
-  set (SEA_DSA_REPO "https://github.com/satbekmyrza/sea-dsa.git"
+  set (SEA_DSA_REPO "https://github.com/satbekmyrza/sea-dsa"
     CACHE STRING "sea-dsa repo")
-  set (CRAB_LLVM_REPO "https://github.com/satbekmyrza/crab-llvm.git"
+  set (CRAB_LLVM_REPO "https://github.com/satbekmyrza/crab-llvm"
     CACHE STRING "crab-llvm repo")
   
   add_custom_target (seahorn-llvm-git
@@ -99,10 +96,8 @@ if (NOT CMAKE_INSTALL_RPATH)
 endif ()
 
 
-
-################################### Z3 ###################################
-set (Z3_TAG "z3-4.4.0" CACHE STRING "Z3 git tag to use")
-set (Z3_REPO "https://github.com/Z3Prover/z3.git" CACHE STRING "Z3 repo")
+set (Z3_TAG "origin/spacer" CACHE STRING "Z3 git tag to use")
+set (Z3_REPO "https://bitbucket.org/spacer/code.git" CACHE STRING "Z3 repo")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   set (Z3_DEBUG "-d")
 else()
@@ -112,19 +107,18 @@ endif()
 ExternalProject_Add(z3
   GIT_REPOSITORY  ${Z3_REPO}
   GIT_TAG ${Z3_TAG}
-  # SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/z3
   BUILD_IN_SOURCE 1
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
-  CONFIGURE_COMMAND env CC=gcc-4.8 CXX=g++-4.8 ./configure -p <INSTALL_DIR> -b build --staticlib ${Z3_DEBUG}
-  BUILD_COMMAND make -j96 -C build
+  CONFIGURE_COMMAND env CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER}
+  ./configure -p <INSTALL_DIR> -b build --staticlib ${Z3_DEBUG}
+  BUILD_COMMAND make -j3 -C build
   INSTALL_COMMAND make -C build install
-  # COMMAND CC=gcc-4.8 CXX=g++-4.8 python3 scripts/mk_make.py --prefix=<INSTALL_DIR> && cd build && make && make install
-  # COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_LIST_FILE}
+  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_LIST_FILE}
   LOG_CONFIGURE 1
   LOG_INSTALL 1
   LOG_BUILD 1)
 
-find_package(Z3 4.4.0)
+find_package(Z3 4.3.2)
 if (NOT Z3_FOUND)
   ExternalProject_Get_Property (z3 INSTALL_DIR)
   set(Z3_ROOT ${INSTALL_DIR} CACHE PATH "Forced location of Z3" FORCE)
@@ -137,25 +131,17 @@ else()
   install (PROGRAMS ${Z3_EXECUTABLE} DESTINATION bin)
 endif()
 
-
-
-################################### LLVM ###################################
 ExternalProject_Add (llvm
-  GIT_REPOSITORY https://github.com/llvm/llvm-project.git
-  GIT_TAG llvmorg-3.6.0
+  SVN_REPOSITORY http://llvm.org/svn/llvm-project/llvm/tags/RELEASE_360/final/
   SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/llvm
-  SOURCE_SUBDIR llvm
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
   CMAKE_ARGS
-  # -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-  --parallel 97
-  -DCMAKE_C_COMPILER=gcc-4.8 -DCMAKE_CXX_COMPILER=g++-4.8
+  -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
   -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
   -DLLVM_TARGETS_TO_BUILD:STRING=X86 -DWITH_POLY:BOOL=OFF
   -DLLVM_ENABLE_PEDANTIC=OFF
   -DLLVM_ENABLE_PIC=ON -DLLVM_REQUIRES_RTTI:BOOL=TRUE
-  # -D_GLIBCXX_USE_CXX11_ABI=OFF
   TEST_AFTER_INSTALL 1
   TEST_COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_LIST_FILE}
   LOG_CONFIGURE 1
@@ -194,8 +180,6 @@ else()
   add_definitions(${LLVM_DEFINITIONS})
 
 endif()
-
-
 
 set (PACKAGE_NAME SeaHorn)
 set(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
