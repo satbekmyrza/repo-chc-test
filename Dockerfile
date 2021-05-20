@@ -42,12 +42,12 @@ RUN \
   cd llvm-project/llvm && \
   mkdir build && \
   cd build && \
-  cmake -DCMAKE_INSTALL_PREFIX:PATH=/root/llvm-z3-run .. && \
+  cmake -DCMAKE_INSTALL_PREFIX:PATH=/root/llvm-z3-run -DLLVM_REQUIRES_RTTI:BOOL=TRUE .. && \
   cmake --build . --target install -- -j && \
 
   cd /root && \
-  git clone --depth 1 --branch z3-4.6.0 https://github.com/Z3Prover/z3.git && \
-  cd z3 && \
+  git clone https://bitbucket.org/spacer/code.git && \
+  cd code && \
   python scripts/mk_make.py --prefix=/root/llvm-z3-run && \
   cd build && \
   make -j && \
