@@ -37,14 +37,12 @@ RUN \
 WORKDIR /root
 RUN \
   mkdir llvm-z3-run && \
-
   git clone --depth 1 --branch llvmorg-3.6.0 https://github.com/llvm/llvm-project.git && \
   cd llvm-project/llvm && \
   mkdir build && \
   cd build && \
   cmake -DCMAKE_INSTALL_PREFIX:PATH=/root/llvm-z3-run -DLLVM_REQUIRES_RTTI:BOOL=TRUE .. && \
   cmake --build . --target install -- -j && \
-
   cd /root && \
   git clone https://bitbucket.org/spacer/code.git && \
   cd code && \
@@ -52,7 +50,6 @@ RUN \
   cd build && \
   make -j && \
   make install && \
-
   cd /root && \
   rm -rf llvm-project/ z3/
 
