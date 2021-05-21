@@ -9,7 +9,7 @@
 # LinearArbitrary-SeaHorn Dependencies #
 
 * LLVM 3.6 (need to install manually or via Dockerfile)
-* Z3 4.6.0 (need to install manually or via Dockerfile)
+* Z3 4.4.0 (need to install manually from https://bitbucket.org/spacer/code.git)
 * Boost 1.55
 * libncurses (brew installation available on Mac os x)
 * libgmp (brew installation available on Mac os x)

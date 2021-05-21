@@ -33,32 +33,26 @@ RUN \
   # sudo pip install lit && \
   # sudo pip install OutputCheck
 
-# Install llvm and z3 into /root/llvm-z3-run
-WORKDIR /root
-RUN \
-  mkdir llvm-z3-run && \
-
-  git clone --depth 1 --branch llvmorg-3.6.0 https://github.com/llvm/llvm-project.git && \
-  cd llvm-project/llvm && \
-  mkdir build && \
-  cd build && \
-  cmake -DCMAKE_INSTALL_PREFIX:PATH=/root/llvm-z3-run .. && \
-  cmake --build . --target install -- -j && \
-
-  cd /root && \
-  git clone --depth 1 --branch z3-4.6.0 https://github.com/Z3Prover/z3.git && \
-  cd z3 && \
-  python scripts/mk_make.py --prefix=/root/llvm-z3-run && \
-  cd build && \
-  make -j && \
-  make install && \
-
-  cd /root && \
-  rm -rf llvm-project/ z3/
-
+WORKDIR /root/
 
 # Install LinearArbitrary-SeaHorn
+RUN \
+  git clone --branch build-with-spacer-z3 https://github.com/satbekmyrza/chc-test-repo.git && \
+  cd chc-test-repo && \
+  mkdir build && cd build && \
+  cmake -DCMAKE_INSTALL_PREFIX=run/ ../ && \
+  cmake --build . && \
+  cmake --build . --target extra && cmake .. && \
+  cmake --build . --target crab && cmake .. && \
+  cmake --build . --target install -- -j && \
+  cd /root/chc-test-repo && \
+  cd libsvm && make clean && make -j && \
+  cd ../C50 && make clean && make -j
 
+ENV C_INCLUDE_PATH="/root/chc-test-repo/include/seahorn:$C_INCLUDE_PATH"
+
+ENV PATH="/root/chc-test-repo/build/run/bin:$PATH"
 
 EXPOSE 22
+
 CMD ["/usr/sbin/sshd", "-D"]
