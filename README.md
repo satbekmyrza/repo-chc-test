@@ -8,17 +8,20 @@
 
 # LinearArbitrary-SeaHorn Dependencies #
 
-* LLVM 3.6 (need to install manually or via Dockerfile)
-* Z3 4.4.0 (need to install manually from https://bitbucket.org/spacer/code.git)
+All dependencies are automatically installed by Dockerfile.
+* LLVM 3.6
+* Z3 4.4.0 (comes with spacer/code, refer to seahorn paper)
 * Boost 1.55
 * libncurses (brew installation available on Mac os x)
 * libgmp (brew installation available on Mac os x)
 * GCC 4.8, G++ 4.8 (latest that comes with Ubuntu 14.04)
 
 
-# LinearArbitrary-SeaHorn Installation #
-Precondition1: llvm and z3 are installed at `/root/llvm-z3-run/`
-Precondition2: you are now at `/root/chc-test-repo/build/`
+# LinearArbitrary-SeaHorn Manual Installation #
+Caution: LinearArbitrary-SeaHorn does not work with external installation of LLVM and Z3. It is recommended to install them automatically by CMakeLists.txt.  
+Note: It is recommended to use the Dockerfile for automatic installation of LinearArbitrary-SeaHorn.  
+
+Precondition: you are now at `/root/chc-test-repo/build/`
 
 * `rm -rf *` to clean current folder
 * `rm -rf ../ext ../llvm-dsa ../llvm-seahorn ../sea-dsa ../crab-llvm` to remove dependencies installed previously, if any
