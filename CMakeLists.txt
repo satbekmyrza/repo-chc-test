@@ -96,8 +96,7 @@ if (NOT CMAKE_INSTALL_RPATH)
 endif ()
 
 
-set (Z3_TAG "origin/spacer" CACHE STRING "Z3 git tag to use")
-set (Z3_REPO "https://bitbucket.org/spacer/code.git" CACHE STRING "Z3 repo")
+set (Z3_REPO "https://github.com/satbekmyrza/chc-spacer-code.git" CACHE STRING "Z3 repo")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   set (Z3_DEBUG "-d")
 else()
@@ -106,7 +105,6 @@ endif()
 
 ExternalProject_Add(z3
   GIT_REPOSITORY  ${Z3_REPO}
-  GIT_TAG ${Z3_TAG}
   BUILD_IN_SOURCE 1
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
   CONFIGURE_COMMAND env CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER}
@@ -132,8 +130,8 @@ else()
 endif()
 
 ExternalProject_Add (llvm
-  SVN_REPOSITORY http://llvm.org/svn/llvm-project/llvm/tags/RELEASE_360/final/
-  SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/llvm
+  GIT_REPOSITORY https://github.com/satbekmyrza/chc-llvm-3.6.git
+  SOURCE_DIR ${CMAKE_SOURCE_DIR}/ext/chc-llvm-3.6
   INSTALL_DIR ${CMAKE_BINARY_DIR}/run
   CMAKE_ARGS
   -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
