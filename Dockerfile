@@ -37,7 +37,7 @@ WORKDIR /root/
 
 # Install LinearArbitrary-SeaHorn
 RUN \
-  git clone --branch build-with-spacer-z3 https://github.com/satbekmyrza/chc-test-repo.git && \
+  git clone https://github.com/satbekmyrza/chc-test-repo.git && \
   cd chc-test-repo && \
   mkdir build && cd build && \
   cmake -DCMAKE_INSTALL_PREFIX=run/ ../ && \
