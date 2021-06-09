@@ -41,7 +41,7 @@ RUN \
   cd chc-test-repo && \
   mkdir build && cd build && \
   cmake -DCMAKE_INSTALL_PREFIX=run/ ../ && \
-  cmake --build . && \
+  cmake --build . -- -j && \
   cmake --build . --target extra && cmake .. && \
   cmake --build . --target crab && cmake .. && \
   cmake --build . --target install -- -j && \
